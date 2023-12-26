@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Server = void 0;
 const express_1 = __importDefault(require("express"));
 const path_1 = __importDefault(require("path"));
+const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor(options) {
         this.app = (0, express_1.default)();
@@ -30,6 +31,14 @@ class Server {
             this.app.use(express_1.default.urlencoded({ extended: true })); // x-www-form-urlencoded
             //* Public Folder
             this.app.use(express_1.default.static(this.publicPath));
+            //* Cors
+            // this.app.use(cors({
+            //   origin: 'http://localhost:3000',  // Reemplaza con tu URL frontend
+            //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+            //   credentials: true,  // Permite enviar cookies de origen a destino
+            //   optionsSuccessStatus: 204,
+            // }));
+            this.app.use((0, cors_1.default)());
             //* Routes
             this.app.use(this.routes);
             //* SPA
