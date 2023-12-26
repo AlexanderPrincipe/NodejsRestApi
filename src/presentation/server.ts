@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path from 'path';
+import cors from 'cors';
 
 interface Options {
   port: number;
@@ -34,6 +35,14 @@ export class Server {
     //* Public Folder
     this.app.use( express.static( this.publicPath ) );
 
+    //* Cors
+    // this.app.use(cors({
+    //   origin: 'http://localhost:3000',  // Reemplaza con tu URL frontend
+    //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    //   credentials: true,  // Permite enviar cookies de origen a destino
+    //   optionsSuccessStatus: 204,
+    // }));
+    this.app.use(cors());
 
     //* Routes
     this.app.use( this.routes );
